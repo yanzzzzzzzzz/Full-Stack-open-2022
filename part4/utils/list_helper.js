@@ -1,14 +1,14 @@
 const dummy = (blogs) => {
-  return 1
-}
+  return 1;
+};
 const totalLikes = (blogs) => {
-  return blogs.reduce((sum, blog) =>  sum = sum + blog.likes , 0 )
-}
+  return blogs.reduce((sum, blog) => (sum = sum + blog.likes), 0);
+};
 const favoriteBlog = (blogs) => {
-  if(blogs.length === 0) return null;
+  if (blogs.length === 0) return null;
 
   const mostLiked = blogs.reduce((prev, curr) => {
-    return prev.likes > curr.likes ? prev : curr ;
+    return prev.likes > curr.likes ? prev : curr;
   });
 
   return {
@@ -17,9 +17,9 @@ const favoriteBlog = (blogs) => {
     likes: mostLiked.likes,
   };
 };
-const mostBlogs = (blogs) =>{
-
-}
+const mostBlogs = (blogs) => {};
 module.exports = {
-  dummy,totalLikes,favoriteBlog
-}
+  dummy,
+  totalLikes,
+  favoriteBlog,
+};
