@@ -4,7 +4,11 @@ const User = require("../models/user");
 
 usersRouter.post("", async (request, response) => {
   const { username, name, password } = request.body;
-
+  if (username.length < 3 || password.length < 3) {
+    return response.status(400).json({
+      error: "username and password need more than three characters",
+    });
+  }
   const existingUser = await User.findOne({ username });
   if (existingUser) {
     return response.status(400).json({
@@ -27,7 +31,11 @@ usersRouter.post("", async (request, response) => {
 });
 
 usersRouter.get("/", async (request, response) => {
-  const users = await User.find({});
+  const users = await User.find({}).populate("blogs", {
+    url: 1,
+    title: 1,
+    author: 1,
+  });
   response.json(users);
 });
 

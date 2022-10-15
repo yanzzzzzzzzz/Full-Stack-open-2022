@@ -1,6 +1,6 @@
 post http://localhost:3001/api/blogs/
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+Authorization:bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QyMTMiLCJpZCI6IjYzNGFhMzFlYjVjOGUwNjUxNDhjYTAzYyIsImlhdCI6MTY2NTgzNTgxMCwiZXhwIjoxNjY1ODM5NDEwfQ.prldbUKDxJztKA9z7zWvJmMrFYsXJg4UmDi2RaErdRg
 
 {
   "url": "root",
