@@ -168,7 +168,6 @@ describe("deletion of a blog", () => {
     const blogsAtStart = await Blog.find({}).populate("user");
 
     const blogToDelete = blogsAtStart[0];
-    console.log(blogToDelete);
     await api
       .delete(`/api/blogs/${blogToDelete.id}`)
       .set("Authorization", `bearer ${token}`)

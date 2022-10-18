@@ -1,10 +1,10 @@
-post http://localhost:3001/api/blogs/
+post http://localhost:3002/api/blogs/
 Content-Type: application/json
-Authorization:bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QyMTMiLCJpZCI6IjYzNGFhMzFlYjVjOGUwNjUxNDhjYTAzYyIsImlhdCI6MTY2NTgzNTgxMCwiZXhwIjoxNjY1ODM5NDEwfQ.prldbUKDxJztKA9z7zWvJmMrFYsXJg4UmDi2RaErdRg
+Authorization:bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QyMTMiLCJpZCI6IjYzNGU1NjE1M2IwYWMyMDQ1YmE3MWVlYSIsImlhdCI6MTY2NjA3ODIzMiwiZXhwIjoxNjY2MDgxODMyfQ.uGtkdsYBv8dwcW-_Uyu9J22iafImGHGxegVyMYvp6VE
 
 {
-  "url": "root",
-  "author": "sekert",
-  "likes": 10,
-  "title":"123"
+  "url": "AAwww.gogole.com",
+  "author": "CCaabasd",
+  "likes": 3,
+  "title":"asdasthis is a goodog"
 }
