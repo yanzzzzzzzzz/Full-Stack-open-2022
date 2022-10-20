@@ -203,5 +203,6 @@ describe("deletion of a blog", () => {
 });
 
 afterAll(() => {
+  Blog.deleteMany({});
   mongoose.connection.close();
 });

@@ -29,13 +29,15 @@ blogsRouter.post("/", async (request, response) => {
     likes: body.likes,
     user: user._id,
   }).populate("user", { username: 1, name: 1 });
+  if (blog.url != null && blog.title != null && blog.author != null) {
+    const savedBlog = await blog.save();
 
-  const savedBlog = await blog.save();
-
-  user.blogs = user.blogs.concat(savedBlog._id);
-  await user.save();
-  console.log(savedBlog);
-  response.status(201).json(savedBlog.toJSON());
+    user.blogs = user.blogs.concat(savedBlog._id);
+    await user.save();
+    response.status(201).json(savedBlog.toJSON());
+  } else {
+    response.status(400).json(blog);
+  }
 });
 
 blogsRouter.delete("/:id", async (request, response) => {
@@ -50,13 +52,16 @@ blogsRouter.delete("/:id", async (request, response) => {
 });
 
 blogsRouter.put("/:id", async (request, response, next) => {
-  const { title, url, author, likes } = request.body;
-  const updateBlog = await Blog.findByIdAndUpdate(
-    request.params.id,
-    { likes: likes ? likes : 0, title: title, url: url, author: author },
-    { new: true, runValidators: true, context: "query" }
-  );
-  response.json(updateBlog);
+  const blog = request.body;
+  const id = request.params.id;
+
+  const updatedBlog = await Blog.findByIdAndUpdate(id, blog, {
+    new: true,
+  }).populate("user", { username: 1, name: 1 });
+
+  updatedBlog
+    ? response.status(200).json(updatedBlog.toJSON())
+    : response.status(404).end();
 });
 
 module.exports = blogsRouter;
