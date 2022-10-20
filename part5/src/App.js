@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Blog from "./components/Blog";
 import LoginForm from "./components/LoginForm";
-import NewBlog from "./components/NewBlog";
+import BlogForm from "./components/BlogForm";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
 import Notification from "./components/Notification";
@@ -12,9 +12,6 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(null);
   const [user, setUser] = useState(null);
-  const [title, setTitle] = useState("");
-  const [author, setAuthor] = useState("");
-  const [url, setUrl] = useState("");
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
   }, []);
@@ -48,13 +45,12 @@ const App = () => {
     }
   };
 
-  const handleLogout = async (event) => {
+  const handleLogout = async () => {
     window.localStorage.removeItem("loggedBlogappUser");
     blogService.setToken(null);
     setUser(null);
   };
-  const handleCreateNewBlog = async (event) => {
-    event.preventDefault();
+  const handleCreateNewBlog = async (title, author, url) => {
     console.log("create new blog with ", title, url, author);
     try {
       const blog = await blogService.create({
@@ -62,9 +58,6 @@ const App = () => {
         url,
         author,
       });
-      setAuthor("");
-      setTitle("");
-      setUrl("");
       console.log("receive:", blog);
       setBlogs(blogs.concat(blog));
     } catch (exception) {
@@ -125,15 +118,7 @@ const App = () => {
           <input type="button" value="logout" onClick={handleLogout} />
           <h2>create new</h2>
           <Togglable buttonLabel="create">
-            <NewBlog
-              handleSubmit={handleCreateNewBlog}
-              title={title}
-              author={author}
-              url={url}
-              handleAuthorChange={({ target }) => setAuthor(target.value)}
-              handleTitleChange={({ target }) => setTitle(target.value)}
-              handleUrlChange={({ target }) => setUrl(target.value)}
-            />
+            <BlogForm createBlog={handleCreateNewBlog} />
           </Togglable>
           {blogs
             .sort((a, b) => b.likes - a.likes)

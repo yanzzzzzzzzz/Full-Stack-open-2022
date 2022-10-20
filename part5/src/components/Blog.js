@@ -24,7 +24,7 @@ const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
       user: blog.user.id,
     });
   };
-  const handleDeleteBlog = async (event) => {
+  const handleDeleteBlog = async () => {
     console.log("click handleDeleteBlog");
     deleteBlog(blog.id, blog);
   };
@@ -34,9 +34,9 @@ const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
         {blog.title}
         <button onClick={toggleVisibility}>{visible ? "hide" : "view"}</button>
         {visible && (
-          <div>
-            <div>{blog.url}</div>
-            <div>
+          <div className="blog-details">
+            <div className="blog-url">{blog.url}</div>
+            <div className="likes">
               likes:{blog.likes}
               <button onClick={handleUpdateLikes}>likes</button>
             </div>
