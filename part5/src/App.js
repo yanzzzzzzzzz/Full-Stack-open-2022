@@ -89,6 +89,7 @@ const App = () => {
     ) {
       console.log("handleDeleteBlog");
       try {
+        blogService.setToken(user.token);
         await blogService.remove(id);
         const newBlogs = blogs.filter((blog) => blog.id !== id);
         setBlogs(newBlogs);

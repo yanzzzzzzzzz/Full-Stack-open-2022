@@ -30,7 +30,7 @@ const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
   };
   return (
     <div style={blogStyle}>
-      <div>
+      <div className="blog">
         {blog.title}
         <button onClick={toggleVisibility}>{visible ? "hide" : "view"}</button>
         {visible && (
@@ -43,7 +43,9 @@ const Blog = ({ blog, updateLikes, deleteBlog, user }) => {
             <div>{blog.author}</div>
             {blog.user.username === user.username && (
               <div>
-                <button onClick={handleDeleteBlog}>remove</button>
+                <button id="remove" onClick={handleDeleteBlog}>
+                  remove
+                </button>
               </div>
             )}
           </div>
