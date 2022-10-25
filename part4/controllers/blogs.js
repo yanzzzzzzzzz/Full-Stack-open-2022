@@ -1,7 +1,7 @@
 const blogsRouter = require("express").Router();
 const Blog = require("../models/blog");
 const User = require("../models/user");
-
+const jwt = require("jsonwebtoken");
 const config = require("../utils/config");
 
 blogsRouter.get("/", async (request, response) => {
@@ -41,10 +41,18 @@ blogsRouter.post("/", async (request, response) => {
 });
 
 blogsRouter.delete("/:id", async (request, response) => {
+  const token = request.token;
   const user = request.user;
-  const blog = await Blog.findById(request.params.id);
+  const decodedToken = jwt.verify(token, config.SECRET);
+
+  if (!(token && decodedToken.id)) {
+    return response.status(401).json({ error: "token missing or invalid" });
+  }
+
+  const id = request.params.id;
+  const blog = await Blog.findById(id);
   if (blog.user.toString() === user._id.toString()) {
-    await Blog.findByIdAndDelete(request.params.id);
+    await Blog.findByIdAndDelete({ _id: id });
     response.status(204).end();
   } else {
     response.status(401).json({ error: "delete user not create user" });
